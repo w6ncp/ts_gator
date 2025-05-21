@@ -7,10 +7,6 @@
     "strict": true,
     "moduleResolution": "Node"
   },
-  "type": "module",
-  "scripts": {
-    "start": "tsx ./src/index.ts"
-  },
   "include": ["./src/**/*.ts"],
   "exclude": ["node_modules"]
 }
