@@ -1,7 +1,5 @@
-import { createFeed, getFeeds, getFeedByURL } from "../lib/db/queries/feeds.js";
-import { readConfig } from "../config";
-import { getUserByName } from "../lib/db/queries/users";
-import { createFeedFollow, getFeedFollowsByUserId } from "../lib/db/queries/feed_follows.js";
+import { createFeed } from "../lib/db/queries/feeds.js";
+import { createFeedFollow } from "../lib/db/queries/feed_follows.js";
 import { User, Feed } from "../lib/db/schema.js";
 import { printFeedFollow } from "./feedFollows.js";
 

@@ -8,6 +8,7 @@ import { handlerReset } from "./commands/reset";
 import { handlerAddFeed } from "./commands/feeds";
 import { handlerFollowFeed, handlerListFeeds, handlerUnfollowFeed } from "./commands/feedFollows";
 import { handlerLogin, handlerRetister, handlerUsers } from "./commands/users";
+import { handlerBrowse } from "./commands/browse";
 import { middlewareLoggedIn } from "./middleware";
 
 async function main() {
@@ -38,6 +39,9 @@ async function main() {
   );
   registerCommand(commandsRegistry, "unfollow",
     middlewareLoggedIn(handlerUnfollowFeed),
+  );
+  registerCommand(commandsRegistry, "browse",
+    middlewareLoggedIn(handlerBrowse),
   );
 
 

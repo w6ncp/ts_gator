@@ -1,7 +1,12 @@
 import { db } from "../index.js";
 import { feeds } from "../schema.js";
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { firstOrUndefined } from "../utils.js";
+
+export async function deleteAllFeeds() {
+    await db.delete(feeds);
+    console.log('All feeds deleted successfully');
+}
 
 export async function createFeed(
     feedName: string,
@@ -30,11 +35,6 @@ export async function getFeedByURL(url: string) {
     return firstOrUndefined(result);
 }
 
-export async function deleteAllFeeds() {
-    await db.delete(feeds);
-    console.log('All feeds deleted successfully');
-}
-
 export async function markFeedFetched(feedId: string) {
     const result = await db
         .update(feeds)
@@ -45,4 +45,13 @@ export async function markFeedFetched(feedId: string) {
         .where(eq(feeds.id, feedId))
         .returning();
     return firstOrUndefined(result);
+}
+
+export async function getNextFeedToFetch() {
+  const result = await db
+    .select()
+    .from(feeds)
+    .orderBy(sql`${feeds.lastFetchedAt} asc nulls first`)
+    .limit(1);
+  return firstOrUndefined(result);
 }

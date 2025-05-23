@@ -1,8 +1,7 @@
 import { db } from "../index.js";
-import { feedFollows, feeds, users, User } from "../schema.js";
+import { feedFollows, feeds, users } from "../schema.js";
 import { eq, and } from 'drizzle-orm';
 import { firstOrUndefined } from "../utils.js";
-import { getFeedByURL } from "./feeds.js";
 
 export async function createFeedFollow(
     feedId: string,
